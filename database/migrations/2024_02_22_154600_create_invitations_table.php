@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('messages_cache', function (Blueprint $table) {
+        Schema::create('invitations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->text('message');
-            $table->timestamp('date_creation');
+            $table->foreignId('emitter_user')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('receiving _user')->references('id')->on('users')->onDelete('cascade');
+            $table->enum('statut', ['en_attente', 'acceptee', 'refusee'])->default('en_attente');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('messages_cache');
+        Schema::dropIfExists('invitations');
     }
 };

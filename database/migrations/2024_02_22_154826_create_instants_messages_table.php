@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('messages_instantanes', function (Blueprint $table) {
+        Schema::create('instants_messages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('emitter_user')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('receiving _user')->references('id')->on('users')->onDelete('cascade');
-            $table->text('contenu');
+            $table->text('content');
             $table->timestamp('date_sent');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('messages_instantanes');
+        Schema::dropIfExists('instants_messages');
     }
 };
